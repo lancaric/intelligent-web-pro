@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Clock3, Mail, MapPin } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -161,7 +161,7 @@ function ContactPage() {
   );
 }
 
-function Field({ label, error, htmlFor, children }: { label: string; error?: string; htmlFor: string; children: React.ReactNode }) {
+function Field({ label, error, htmlFor, children }: { label: string; error: string | undefined; htmlFor: string; children: ReactNode }) {
   return (
     <div>
       <label htmlFor={htmlFor} className="mb-2 block text-sm font-semibold">{label}</label>
