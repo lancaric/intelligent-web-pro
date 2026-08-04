@@ -3,10 +3,10 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Lanzo — IT služby, weby a AI automatizácie" },
-      { name: "description", content: "Spoľahlivá IT podpora, moderné webové riešenia a praktické AI automatizácie pre firmy aj jednotlivcov." },
-      { property: "og:title", content: "Lanzo — Precízna technológia pre váš biznis" },
-      { property: "og:description", content: "IT podpora, weby a AI automatizácie s osobným a transparentným prístupom." },
+      { title: "Lanzo — IT partner pre malé a stredné firmy" },
+      { name: "description", content: "Dlhodobý IT partner pre firmy bez vlastného IT oddelenia. Externá IT správa, kybernetická bezpečnosť, siete, AI automatizácia a vývoj aplikácií." },
+      { property: "og:title", content: "Lanzo — Váš dlhodobý IT partner" },
+      { property: "og:description", content: "Komplexné IT riešenia pre malé a stredné firmy. Externá správa, bezpečnosť, siete, AI automatizácia a vývoj aplikácií." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
         url: "/",
         email: "info@lanzo.sk",
         areaServed: "Slovensko",
-        description: "IT služby, tvorba webov a AI automatizácie.",
+        description: "IT partner pre malé a stredné firmy: externá IT správa, kybernetická bezpečnosť, sieťová infraštruktúra, AI automatizácia a vývoj interných aplikácií.",
       }),
     }],
   }),
@@ -31,24 +31,24 @@ export const Route = createFileRoute("/")({
 const services = [
   {
     number: "01",
-    label: "IT služby",
-    title: "Technika bez zbytočných prestojov",
-    text: "Diagnostika a oprava počítačov, Windows, siete, zálohovanie, bezpečnosť aj vzdialená podpora.",
-    items: ["Správa PC a notebookov", "Wi-Fi a routery", "Obnova dát a odstránenie vírusov"],
+    label: "Externá IT správa",
+    title: "Starostlivosť o IT bez vlastného oddelenia",
+    text: "Vzdialená aj onsite podpora, správa zariadení, Microsoft 365, aktualizácie a pravidelná údržba celého IT prostredia.",
+    items: ["Vzdialená a onsite podpora", "Správa počítačov a účtov", "Microsoft 365 administrácia"],
   },
   {
     number: "02",
-    label: "Web & aplikácie",
-    title: "Digitálna prezentácia, ktorá pracuje",
-    text: "Rýchle firemné weby, landing pages a jednoduché aplikácie navrhnuté podľa reálneho cieľa.",
-    items: ["Webové stránky na mieru", "Firemné prezentácie", "Správa a údržba webov"],
+    label: "Kybernetická bezpečnosť",
+    title: "Ochrana dát a systémov pred hrozbami",
+    text: "Bezpečnostné audity, firewally, VPN, viacfaktorové overenie a príprava na požiadavky NIS2.",
+    items: ["Bezpečnostné audity", "MFA a VPN prístupy", "Príprava na NIS2"],
   },
   {
     number: "03",
-    label: "AI & automatizácia",
-    title: "Menej rutiny. Viac užitočnej práce.",
-    text: "Praktickí AI asistenti, chatboty a prepojenia aplikácií, ktoré zjednodušia každodennú administratívu.",
-    items: ["AI chatboty a asistenti", "Automatizácia procesov", "Integrácie medzi aplikáciami"],
+    label: "AI automatizácia",
+    title: "Menej ručnej práce. Viac času pre biznis.",
+    text: "AI chatboti, firemní asistenti, automatizácia procesov a digitalizácia interných workflowov.",
+    items: ["AI chatboty a asistenti", "Automatizácia procesov", "Digitalizácia interných procesov"],
   },
 ];
 
@@ -84,10 +84,10 @@ function Index() {
               Dostupný pre nové projekty
             </div>
             <h1 className="mb-8 max-w-4xl text-5xl font-extrabold leading-[0.98] sm:text-6xl lg:text-7xl">
-              Precízna technológia<br />pre váš biznis.
+              Váš dlhodobý<br />IT partner.
             </h1>
             <p className="mb-10 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              Spoľahlivá IT podpora, moderné webové riešenia a praktické AI automatizácie — osobne, zrozumiteľne a bez zbytočných nákladov.
+              Komplexné IT riešenia pre malé a stredné firmy bez vlastného IT oddelenia. Od každodennej podpory po strategický rozvoj infraštruktúry.
             </p>
             <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
               <Link to="/kontakt" className="inline-flex min-h-14 items-center justify-center bg-foreground px-8 font-semibold text-background transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
@@ -107,9 +107,9 @@ function Index() {
                 <span className="shrink-0 text-primary">[PRIPRAVENÝ]</span>
               </div>
               <div className="space-y-3 font-mono text-[11px] leading-relaxed sm:text-xs">
-                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4"><span>IT PODPORA</span><span className="text-success">ONLINE</span></div>
-                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4"><span>WEBOVÉ RIEŠENIA</span><span>NA MIERU</span></div>
-                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4"><span>AI AUTOMATIZÁCIE</span><span>PRAKTICKÉ</span></div>
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4"><span>IT SPRÁVA A PODPORA</span><span className="text-success">ONLINE</span></div>
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4"><span>KYBERNETICKÁ BEZPEČNOSŤ</span><span>AKTÍVNA</span></div>
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4"><span>AI AUTOMATIZÁCIA</span><span>PRAKTICKÁ</span></div>
                 <div className="relative mt-5 h-1 w-full bg-secondary"><div className="absolute inset-y-0 left-0 w-4/5 bg-primary" /></div>
                 <div className="pt-3 leading-6 text-muted-foreground">
                   &gt; Analýza potrieb... PRIPRAVENÁ<br />
@@ -126,10 +126,10 @@ function Index() {
         <div className="mx-auto max-w-7xl px-5 sm:px-6">
           <div className="mb-16 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-5 sm:mb-20">
             <div>
-              <p className="mb-3 font-mono text-xs uppercase text-primary">Čo dokážem vyriešiť</p>
-              <h2 className="text-3xl font-extrabold sm:text-4xl">Tri piliere služieb</h2>
+              <p className="mb-3 font-mono text-xs uppercase text-primary">Naše služby</p>
+              <h2 className="text-3xl font-extrabold sm:text-4xl">Päť oblastí IT<br />pod jednou strechou</h2>
             </div>
-            <span className="hidden font-mono text-xs uppercase text-background/45 sm:block">Služby / 01—03</span>
+            <span className="hidden font-mono text-xs uppercase text-background/45 sm:block">Služby / 01—05</span>
           </div>
           <div className="grid grid-cols-1 border-t border-background/15 md:grid-cols-3">
             {services.map((service, index) => (
@@ -157,15 +157,15 @@ function Index() {
             <p className="mb-4 font-mono text-xs uppercase text-primary">Dôvera bez prázdnych sľubov</p>
             <h2 className="mb-7 text-4xl font-extrabold leading-tight">Technická prax. Moderné nástroje. Ľudský prístup.</h2>
             <p className="leading-relaxed text-muted-foreground">
-              Každý deň riešim reálne IT problémy — od počítačov a softvéru po siete a podporu používateľov. Moderné AI nástroje používam tam, kde prinášajú merateľný úžitok, nie ako náhradu za premýšľanie.
+Každý deň sa staráme o reálne IT prostredia firiem — od každodennej podpory používateľov po bezpečnosť, siete a strategický rozvoj. Stávame sa dlhodobým partnerom, ktorý pozná vaše prostredie a rastie spolu s vami.
             </p>
           </div>
           <div className="grid gap-px border-y border-border bg-border sm:grid-cols-2 lg:col-span-7">
             {[
-              ["01", "Jedna kontaktná osoba", "Komunikujete priamo so mnou od prvého e-mailu až po odovzdanie."],
-              ["02", "Rozumný rozsah", "Navrhnem iba to, čo rieši váš problém a zodpovedá rozpočtu."],
-              ["03", "Zrozumiteľná komunikácia", "Vysvetlím možnosti a riziká bez komplikovaného technického slovníka."],
-              ["04", "Dôraz na kvalitu", "Každé riešenie testujem a odovzdávam tak, aby ste mu vedeli rozumieť."],
+              ["01", "Dlhodobé partnerstvo", "Nie sme tu na jednorazovú úlohu. Poznáme vaše prostredie a rastieme s vami."],
+              ["02", "Rýchla odozva", "Vzdialená podpora s preaktívnym monitoringom zariadení a systémov."],
+              ["03", "Bezpečnosť na prvom mieste", "Bezpečnosť je súčasť každého riešenia, nie voliteľný doplnok."],
+              ["04", "Transparentná komunikácia", "Vysvetlíme možnosti a riziká bez technického žargónu. Vždy viete, za čo platíte."],
             ].map(([n, title, text]) => (
               <div key={n} className="bg-surface p-7 sm:p-8">
                 <span className="mb-7 block font-mono text-xs text-primary">{n}</span>
@@ -199,9 +199,9 @@ function Index() {
 
       <section className="border-y border-border bg-surface py-24 text-center sm:py-28">
         <div className="mx-auto max-w-4xl px-5 sm:px-6">
-          <p className="mb-6 font-mono text-xs uppercase text-muted-foreground">Máte IT problém alebo nápad na digitálne riešenie?</p>
+          <p className="mb-6 font-mono text-xs uppercase text-muted-foreground">Hľadáte dlhodobého IT partnera?</p>
           <h2 className="mb-8 text-4xl font-extrabold leading-tight sm:text-5xl">Začnime krátkym e-mailom.</h2>
-          <p className="mx-auto mb-10 max-w-xl leading-relaxed text-muted-foreground">Napíšte mi, čo potrebujete vyriešiť. Ozvem sa s doplňujúcimi otázkami a navrhnem ďalší konkrétny krok.</p>
+          <p className="mx-auto mb-10 max-w-xl leading-relaxed text-muted-foreground">Opíšte vašu situáciu. Ozvem sa s doplňujúcimi otázkami a navrhnutým rozsahom bez záväzkov.</p>
           <Link to="/kontakt" className="inline-flex min-h-14 items-center justify-center bg-foreground px-8 font-semibold text-background transition-colors hover:bg-primary hover:text-primary-foreground">Otvoriť kontaktný formulár</Link>
         </div>
       </section>

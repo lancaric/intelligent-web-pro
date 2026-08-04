@@ -1,93 +1,191 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Check, Clock3 } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Cloud,
+  Cpu,
+  Lock,
+  Network,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react";
 
 export const Route = createFileRoute("/sluzby")({
   head: () => ({
     meta: [
-      { title: "Služby a ceny — Lanzo" },
+      { title: "Služby — Lanzo | IT partner pre malé a stredné firmy" },
       {
         name: "description",
         content:
-          "Prehľadné balíčky pre IT podporu, webové stránky, webové aplikácie a automatizácie. Orientačné ceny, jasný rozsah a priama komunikácia.",
+          "Komplexné IT služby pre firmy bez vlastného IT oddelenia: externá IT správa, kybernetická bezpečnosť, sieťová infraštruktúra, AI automatizácia a vývoj interných aplikácií.",
       },
-      { property: "og:title", content: "Služby a orientačné ceny — Lanzo" },
+      { property: "og:title", content: "IT služby pre malé a stredné firmy — Lanzo" },
       {
         property: "og:description",
-        content: "Vyberte si riešenie podľa cieľa a rozpočtu: IT podpora, weby, aplikácie a automatizácie bez skrytých prekvapení.",
+        content:
+          "Dlhodobý IT partner pre firmy bez vlastného IT oddelenia. Externá správa, bezpečnosť, siete, AI automatizácia a vývoj aplikácií.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/sluzby" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: "Lanzo",
+          url: "/sluzby",
+          email: "info@lanzo.sk",
+          areaServed: "Slovensko",
+          description:
+            "IT partner pre malé a stredné firmy: externá IT správa, kybernetická bezpečnosť, sieťová infraštruktúra, AI automatizácia a vývoj interných aplikácií.",
+        }),
+      },
+    ],
   }),
   component: ServicesPage,
 });
 
-const packages = [
+type Service = {
+  number: string;
+  icon: LucideIcon;
+  title: string;
+  tagline: string;
+  description: string;
+  benefits: string[];
+  marketing: string;
+  subject: string;
+};
+
+const services: Service[] = [
   {
     number: "01",
-    label: "IT podpora",
-    title: "Technika bez prestojov",
-    price: "35 – 350 €",
-    timeframe: "podľa dohody",
+    icon: Cloud,
+    title: "Externá IT správa a podpora",
+    tagline: "Komplexná starostlivosť o firemnú IT infraštruktúru",
     description:
-      "Rýchla pomoc s počítačmi, softvérom, sieťou a bezpečnosťou pre jednotlivcov aj menšie firmy.",
-    items: [
-      "Diagnostika a riešenie technických problémov",
-      "Nastavenie počítačov, Windows a programov",
-      "Wi-Fi, routery, zálohovanie a bezpečnosť",
-      "Vzdialená alebo osobná podpora",
+      "Postaráme sa o celú vašu IT infraštruktúru bez potreby vlastného IT oddelenia. Od každodenných technických problémov po dlhodobú údržbu a optimalizáciu prostredia.",
+    benefits: [
+      "Vzdialená a onsite IT podpora",
+      "Správa počítačov a notebookov",
+      "Riešenie technických problémov používateľov",
+      "Aktualizácie systémov a softvéru",
+      "Monitoring zariadení",
+      "Správa používateľských účtov",
+      "Microsoft 365 administrácia",
+      "Pravidelná údržba IT prostredia",
     ],
-    subject: "Mám záujem o IT podporu",
+    marketing:
+      "Zabezpečíme, aby vaša IT infraštruktúra fungovala spoľahlivo každý deň. Ste pripravení sústrediť sa na podnikanie a IT necháte na nás.",
+    subject: "Mám záujem o externú IT správu a podporu",
   },
   {
     number: "02",
-    label: "Webové stránky",
-    title: "Profesionálny web",
-    price: "490 – 1 500 €",
-    timeframe: "2 – 5 týždňov",
+    icon: ShieldCheck,
+    title: "Kybernetická bezpečnosť",
+    tagline: "Ochrana firemných dát, systémov a siete",
     description:
-      "Rýchla a dôveryhodná prezentácia pre živnostníka alebo menšiu firmu, pripravená získavať dopyty.",
-    items: [
-      "Návrh štruktúry a responzívny dizajn",
-      "Kontaktný formulár a základné SEO",
-      "Meranie návštevnosti a technické nasadenie",
-      "Krátke zaškolenie po odovzdaní",
+      "Chránime vaše firemné dáta, systémy a sieť pred bezpečnostnými hrozbami. Od auditov po implementáciu bezpečnostných politík a prípravu na legislatívne požiadavky.",
+    benefits: [
+      "Bezpečnostné audity",
+      "Kontrola konfigurácie firewallov",
+      "Nastavenie VPN prístupov",
+      "Viacfaktorové overenie (MFA)",
+      "Bezpečnostné politiky",
+      "Ochrana používateľských účtov",
+      "Kontrola zálohovania",
+      "Základná príprava na požiadavky NIS2",
     ],
-    subject: "Mám záujem o webovú stránku",
+    marketing:
+      "Bezpečnosť už nie je výsadou veľkých spoločností. Pomáhame firmám chrániť ich dáta, systémy a podnikanie.",
+    subject: "Mám záujem o kybernetickú bezpečnosť",
   },
   {
     number: "03",
-    label: "Automatizácie",
-    title: "Menej ručnej práce",
-    price: "250 – 1 200 €",
-    timeframe: "1 – 3 týždne",
+    icon: Network,
+    title: "Sieťová infraštruktúra",
+    tagline: "Návrh, konfigurácia a správa firemných sietí",
     description:
-      "Prepojenie nástrojov a automatizácia opakovaných úloh, ktoré dnes zbytočne berú váš čas.",
-    items: [
-      "Analýza procesu a návrh riešenia",
-      "Prepojenie formulárov, e-mailov a tabuliek",
-      "AI asistent alebo jednoduchý chatbot",
-      "Testovanie, dokumentácia a odovzdanie",
+      "Navrhujeme, konfigurujeme a spravujeme firemné siete, ktoré sú stabilným základom každodennej prevádzky. Riešenia rastú spolu s vaším podnikaním.",
+    benefits: [
+      "Návrh sieťovej architektúry",
+      "Konfigurácia switchov",
+      "WiFi riešenia",
+      "VLAN siete",
+      "Firewall riešenia",
+      "VPN pre vzdialený prístup",
+      "Optimalizácia výkonu siete",
+      "Diagnostika problémov",
     ],
-    subject: "Mám záujem o automatizáciu",
-    featured: true,
+    marketing:
+      "Stabilná sieť je základ každej modernej firmy. Navrhujeme riešenia, ktoré rastú spolu s vaším podnikaním.",
+    subject: "Mám záujem o sieťovú infraštruktúru",
   },
   {
     number: "04",
-    label: "Webové aplikácie",
-    title: "Nástroj na mieru",
-    price: "1 200 – 5 000 €",
-    timeframe: "4 – 10 týždňov",
+    icon: Cpu,
+    title: "AI automatizácia a digitalizácia",
+    tagline: "Moderné technológie na šetrenie času a ručnej práce",
     description:
-      "Jednoduchá interná alebo zákaznícka aplikácia navrhnutá okolo konkrétneho pracovného postupu.",
-    items: [
-      "Návrh používateľského toku a prototyp",
-      "Prihlásenie, formuláre a práca s dátami",
-      "Responzívne rozhranie a testovanie",
-      "Nasadenie a dohodnutá podpora",
+      "Pomáhame firmám využiť potenciál umelej inteligencie a automatizácie tam, kde môže reálne ušetriť čas a peniaze. Od AI chatbotov po digitalizáciu interných procesov.",
+    benefits: [
+      "AI chatboty",
+      "Firemní AI asistenti",
+      "Automatizácia opakovaných procesov",
+      "Spracovanie dokumentov",
+      "Automatické reporty",
+      "Prepojenie systémov",
+      "Digitalizácia interných procesov",
     ],
-    subject: "Mám záujem o webovú aplikáciu",
+    marketing:
+      "Pomáhame firmám využiť potenciál umelej inteligencie a automatizácie tam, kde môže ušetriť čas a peniaze.",
+    subject: "Mám záujem o AI automatizáciu a digitalizáciu",
+  },
+  {
+    number: "05",
+    icon: Lock,
+    title: "Vývoj interných aplikácií",
+    tagline: "Softvérové riešenia prispôsobené potrebám firmy",
+    description:
+      "Vyvíjame digitálne nástroje, ktoré zjednodušujú každodennú prácu a riešia konkrétne firemné potreby — od zákazkových systémov po firemné dashboardy a integrácie.",
+    benefits: [
+      "Interné webové aplikácie",
+      "Zákazkové systémy",
+      "Administračné panely",
+      "Formulárové systémy",
+      "Evidenčné aplikácie",
+      "Firemné dashboardy",
+      "Integrácia existujúcich riešení",
+    ],
+    marketing:
+      "Vyvíjame digitálne nástroje, ktoré zjednodušujú každodennú prácu a riešia konkrétne firemné potreby.",
+    subject: "Mám záujem o vývoj interných aplikácií",
+  },
+];
+
+const trustPillars = [
+  {
+    title: "Dlhodobé partnerstvo",
+    description:
+      "Nie sme tu na jednorazovú úlohu. Stávame sa vaším IT partnerom, ktorý pozná vaše prostredie a rastie spolu s vami.",
+  },
+  {
+    title: "Spoľahlivosť",
+    description:
+      "Rýchla odozva, proaktívny monitoring a riešenia, ktoré fungujú aj keď sa niečo pokazí.",
+  },
+  {
+    title: "Bezpečnosť na prvom mieste",
+    description:
+      "Bezpečnosť nie je doplnok — je súčasťou každého riešenia, ktoré dodávame.",
+  },
+  {
+    title: "Transparentná komunikácia",
+    description:
+      "Vysvetlíme možnosti a riziká bez technického žargónu. Vždy viete, za čo platíte.",
   },
 ];
 
@@ -111,84 +209,87 @@ function ServicesPage() {
         </div>
       </header>
 
+      {/* Hero */}
       <section className="border-b border-border pb-16 pt-14 sm:pb-20 sm:pt-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6">
-          <Link to="/" className="mb-10 inline-flex items-center gap-2 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground">
+          <Link
+            to="/"
+            className="mb-10 inline-flex items-center gap-2 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
             <ArrowLeft aria-hidden="true" className="size-4" /> Späť na úvod
           </Link>
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="reveal-up lg:col-span-8">
-              <p className="mb-4 font-mono text-xs uppercase text-primary">Služby / orientačný cenník</p>
+              <p className="mb-4 font-mono text-xs uppercase text-primary">Služby / IT partner pre firmy</p>
               <h1 className="max-w-4xl text-4xl font-extrabold leading-tight sm:text-6xl">
-                Jasný rozsah.<br />Rozumná investícia.
+                Váš dlhodobý<br />IT partner.
               </h1>
             </div>
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground lg:col-span-4 lg:pb-2">
-              Vyberte si najbližší typ riešenia. Po krátkej konzultácii dostanete presný rozsah, cenu a termín ešte pred začiatkom práce.
+              Komplexné IT riešenia pre malé a stredné firmy bez vlastného IT oddelenia. Od každodennej podpory po strategický rozvoj infraštruktúry.
             </p>
           </div>
         </div>
       </section>
 
+      {/* Services list */}
       <section className="py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-6">
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-            {packages.map((item) => (
-              <article
-                key={item.number}
-                className={`relative flex min-h-full flex-col border p-6 sm:p-8 ${item.featured ? "border-primary bg-surface shadow-lg" : "border-border bg-background"}`}
-              >
-                {item.featured && (
-                  <span className="absolute right-5 top-0 -translate-y-1/2 bg-primary px-3 py-1 font-mono text-[10px] font-bold uppercase text-primary-foreground">
-                    Častý prvý krok
-                  </span>
-                )}
-                <div className="mb-8 flex items-center justify-between gap-4 font-mono text-xs">
-                  <span className="text-primary">{item.number}</span>
-                  <span className="text-muted-foreground">{item.label}</span>
-                </div>
-                <h2 className="mb-3 text-2xl font-extrabold">{item.title}</h2>
-                <p className="mb-7 min-h-20 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-                <div className="mb-7 border-y border-border py-5">
-                  <p className="mb-1 font-mono text-[10px] uppercase text-muted-foreground">Orientačná cena</p>
-                  <p className="text-2xl font-extrabold">{item.price}</p>
-                  <p className="mt-3 flex items-center gap-2 font-mono text-[11px] text-muted-foreground">
-                    <Clock3 aria-hidden="true" className="size-3.5 text-primary" /> {item.timeframe}
-                  </p>
-                </div>
-                <ul className="mb-9 space-y-3 text-sm leading-relaxed">
-                  {item.items.map((feature) => (
-                    <li key={feature} className="grid grid-cols-[1rem_minmax(0,1fr)] gap-3">
-                      <Check aria-hidden="true" className="mt-0.5 size-4 text-success" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href={`mailto:info@lanzo.sk?subject=${encodeURIComponent(item.subject)}`}
-                  className={`mt-auto inline-flex min-h-12 items-center justify-between gap-3 px-5 text-sm font-semibold transition-colors ${item.featured ? "bg-foreground text-background hover:bg-primary hover:text-primary-foreground" : "border border-foreground bg-background text-foreground hover:bg-foreground hover:text-background"}`}
-                >
-                  Nezáväzne sa opýtať <ArrowRight aria-hidden="true" className="size-4" />
-                </a>
-              </article>
+          <div className="mb-14 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-5">
+            <div>
+              <p className="mb-3 font-mono text-xs uppercase text-primary">Naše služby</p>
+              <h2 className="text-3xl font-extrabold sm:text-4xl">Päť oblastí, ktoré<br />pokryjeme za vás</h2>
+            </div>
+            <span className="hidden font-mono text-xs uppercase text-muted-foreground sm:block">01—05</span>
+          </div>
+
+          <div className="space-y-px border-y border-border bg-border">
+            {services.map((service) => (
+              <ServiceRow key={service.number} service={service} />
             ))}
           </div>
-          <p className="mt-6 max-w-3xl font-mono text-[11px] leading-relaxed text-muted-foreground">
-            * Uvedené ceny sú orientačné. Finálna cena závisí od rozsahu, pripravenosti podkladov a potrebných integrácií. Vždy ju odsúhlasíme vopred.
-          </p>
         </div>
       </section>
 
+      {/* Trust pillars */}
+      <section className="bg-surface py-20 sm:py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="mb-14 max-w-3xl">
+            <p className="mb-4 font-mono text-xs uppercase text-primary">Prečo Lanzo</p>
+            <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl">
+              Dôvera, ktorá má<br />opodstatnenie
+            </h2>
+          </div>
+          <div className="grid gap-px border-y border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {trustPillars.map((pillar, i) => (
+              <div key={pillar.title} className="bg-surface p-8">
+                <span className="mb-6 block font-mono text-sm text-primary">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mb-3 text-lg font-bold">{pillar.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{pillar.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
       <section className="bg-foreground py-20 text-background sm:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-8">
-            <p className="mb-4 font-mono text-xs uppercase text-primary">Neviete, ktorý balíček sedí?</p>
-            <h2 className="max-w-3xl text-3xl font-extrabold leading-tight sm:text-4xl">Stačí opísať problém. Navrhnem najmenší zmysluplný rozsah.</h2>
+            <p className="mb-4 font-mono text-xs uppercase text-primary">Neviete, ktorá služba je pre vás?</p>
+            <h2 className="max-w-3xl text-3xl font-extrabold leading-tight sm:text-4xl">
+              Opíšte svoju situáciu. Navrhujeme najvhodnejší rozsah bez záväzkov.
+            </h2>
           </div>
           <div className="lg:col-span-4 lg:text-right">
-            <a href="mailto:info@lanzo.sk?subject=Krátka konzultácia" className="inline-flex min-h-14 items-center gap-4 bg-primary px-7 font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-              Dohodnúť konzultáciu <ArrowRight aria-hidden="true" className="size-4" />
-            </a>
+            <Link
+              to="/kontakt"
+              className="inline-flex min-h-14 items-center gap-4 bg-primary px-7 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Nezáväzná konzultácia <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -196,9 +297,61 @@ function ServicesPage() {
       <footer className="py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 font-mono text-[10px] uppercase text-muted-foreground sm:px-6 md:flex-row md:items-center">
           <span>© {new Date().getFullYear()} Lanzo</span>
-          <div className="flex flex-wrap gap-x-8 gap-y-3"><span>Slovensko / Remote</span><a href="mailto:info@lanzo.sk" className="transition-colors hover:text-primary">info@lanzo.sk</a><Link to="/ochrana-sukromia" className="transition-colors hover:text-primary">Ochrana súkromia</Link><Link to="/cookies" className="transition-colors hover:text-primary">Cookies</Link></div>
+          <div className="flex flex-wrap gap-x-8 gap-y-3">
+            <span>Slovensko / Remote</span>
+            <a href="mailto:info@lanzo.sk" className="transition-colors hover:text-primary">info@lanzo.sk</a>
+            <Link to="/ochrana-sukromia" className="transition-colors hover:text-primary">Ochrana súkromia</Link>
+            <Link to="/cookies" className="transition-colors hover:text-primary">Cookies</Link>
+          </div>
         </div>
       </footer>
     </main>
+  );
+}
+
+function ServiceRow({ service }: { service: Service }) {
+  const Icon = service.icon;
+  return (
+    <article className="group bg-background transition-colors hover:bg-surface">
+      <div className="grid gap-6 px-1 py-10 sm:px-2 lg:grid-cols-12 lg:gap-10 lg:py-14">
+        {/* Left: icon + number + title */}
+        <div className="lg:col-span-4">
+          <div className="flex items-center gap-4">
+            <div className="grid size-12 shrink-0 place-items-center bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+              <Icon aria-hidden="true" className="size-6" />
+            </div>
+            <span className="font-mono text-sm text-primary">{service.number}</span>
+          </div>
+          <h3 className="mb-2 mt-6 text-2xl font-extrabold leading-tight">{service.title}</h3>
+          <p className="text-sm font-medium text-muted-foreground">{service.tagline}</p>
+        </div>
+
+        {/* Middle: description + benefits */}
+        <div className="lg:col-span-5">
+          <p className="mb-6 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+          <ul className="grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+            {service.benefits.map((benefit) => (
+              <li key={benefit} className="flex items-start gap-2.5 text-sm leading-relaxed">
+                <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-success" />
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Right: marketing quote + CTA */}
+        <div className="flex flex-col justify-between lg:col-span-3">
+          <blockquote className="border-l-2 border-primary/40 pl-4 text-sm italic leading-relaxed text-foreground/80">
+            {service.marketing}
+          </blockquote>
+          <Link
+            to="/kontakt"
+            className="mt-6 inline-flex min-h-11 items-center justify-between gap-3 border border-foreground bg-background px-5 text-sm font-semibold text-foreground transition-colors hover:bg-foreground hover:text-background"
+          >
+            Nezáväzná konzultácia <ArrowRight aria-hidden="true" className="size-4" />
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
