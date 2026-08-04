@@ -8,12 +8,12 @@ export const Route = createFileRoute("/sluzby")({
       {
         name: "description",
         content:
-          "Prehľadné balíčky pre webové stránky, webové aplikácie a automatizácie. Orientačné ceny, jasný rozsah a priama komunikácia.",
+          "Prehľadné balíčky pre IT podporu, webové stránky, webové aplikácie a automatizácie. Orientačné ceny, jasný rozsah a priama komunikácia.",
       },
       { property: "og:title", content: "Služby a orientačné ceny — Lanzo" },
       {
         property: "og:description",
-        content: "Vyberte si riešenie podľa cieľa a rozpočtu: weby, aplikácie a automatizácie bez skrytých prekvapení.",
+        content: "Vyberte si riešenie podľa cieľa a rozpočtu: IT podpora, weby, aplikácie a automatizácie bez skrytých prekvapení.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -26,6 +26,22 @@ export const Route = createFileRoute("/sluzby")({
 const packages = [
   {
     number: "01",
+    label: "IT podpora",
+    title: "Technika bez prestojov",
+    price: "35 – 350 €",
+    timeframe: "podľa dohody",
+    description:
+      "Rýchla pomoc s počítačmi, softvérom, sieťou a bezpečnosťou pre jednotlivcov aj menšie firmy.",
+    items: [
+      "Diagnostika a riešenie technických problémov",
+      "Nastavenie počítačov, Windows a programov",
+      "Wi-Fi, routery, zálohovanie a bezpečnosť",
+      "Vzdialená alebo osobná podpora",
+    ],
+    subject: "Mám záujem o IT podporu",
+  },
+  {
+    number: "02",
     label: "Webové stránky",
     title: "Profesionálny web",
     price: "490 – 1 500 €",
@@ -41,7 +57,7 @@ const packages = [
     subject: "Mám záujem o webovú stránku",
   },
   {
-    number: "02",
+    number: "03",
     label: "Automatizácie",
     title: "Menej ručnej práce",
     price: "250 – 1 200 €",
@@ -58,7 +74,7 @@ const packages = [
     featured: true,
   },
   {
-    number: "03",
+    number: "04",
     label: "Webové aplikácie",
     title: "Nástroj na mieru",
     price: "1 200 – 5 000 €",
@@ -116,7 +132,7 @@ function ServicesPage() {
 
       <section className="py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-6">
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {packages.map((item) => (
               <article
                 key={item.number}
