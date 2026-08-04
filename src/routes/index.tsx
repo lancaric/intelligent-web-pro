@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -67,7 +67,7 @@ function Index() {
             LANZO<span className="text-primary">_</span>
           </a>
           <nav aria-label="Hlavná navigácia" className="hidden items-center gap-7 text-sm font-medium text-muted-foreground md:flex">
-            <a href="#sluzby" className="transition-colors hover:text-foreground">Služby</a>
+            <Link to="/sluzby" className="transition-colors hover:text-foreground">Služby</Link>
             <a href="#pristup" className="transition-colors hover:text-foreground">Prístup</a>
             <a href="#proces" className="transition-colors hover:text-foreground">Spolupráca</a>
             <a href="mailto:info@lanzo.sk" className="font-semibold text-foreground transition-colors hover:text-primary">info@lanzo.sk</a>
@@ -142,6 +142,11 @@ function Index() {
                 </ul>
               </article>
             ))}
+          </div>
+          <div className="mt-12 border-t border-background/15 pt-8 text-right">
+            <Link to="/sluzby" className="inline-flex items-center gap-3 font-mono text-xs font-semibold uppercase text-background transition-colors hover:text-primary">
+              Balíčky a orientačné ceny <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </section>
