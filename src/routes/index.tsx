@@ -70,9 +70,9 @@ function Index() {
             <Link to="/sluzby" className="transition-colors hover:text-foreground">Služby</Link>
             <a href="#pristup" className="transition-colors hover:text-foreground">Prístup</a>
             <a href="#proces" className="transition-colors hover:text-foreground">Spolupráca</a>
-            <a href="mailto:info@lanzo.sk" className="font-semibold text-foreground transition-colors hover:text-primary">info@lanzo.sk</a>
+            <Link to="/kontakt" className="font-semibold text-foreground transition-colors hover:text-primary">Kontakt</Link>
           </nav>
-          <a href="mailto:info@lanzo.sk" className="font-mono text-xs font-semibold text-foreground md:hidden">NAPÍSAŤ →</a>
+          <Link to="/kontakt" className="font-mono text-xs font-semibold text-foreground md:hidden">NAPÍSAŤ →</Link>
         </div>
       </header>
 
@@ -90,9 +90,9 @@ function Index() {
               Spoľahlivá IT podpora, moderné webové riešenia a praktické AI automatizácie — osobne, zrozumiteľne a bez zbytočných nákladov.
             </p>
             <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-              <a href="mailto:info@lanzo.sk?subject=Mám záujem o konzultáciu" className="inline-flex min-h-14 items-center justify-center bg-foreground px-8 font-semibold text-background transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
+              <Link to="/kontakt" className="inline-flex min-h-14 items-center justify-center bg-foreground px-8 font-semibold text-background transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
                 Nezáväzne konzultovať
-              </a>
+              </Link>
               <div className="flex items-center gap-4 px-1 font-mono text-xs text-muted-foreground sm:px-3">
                 <span aria-hidden="true" className="opacity-40">//</span>
                 <span>Napíšte, čo potrebujete vyriešiť</span>
@@ -202,7 +202,7 @@ function Index() {
           <p className="mb-6 font-mono text-xs uppercase text-muted-foreground">Máte IT problém alebo nápad na digitálne riešenie?</p>
           <h2 className="mb-8 text-4xl font-extrabold leading-tight sm:text-5xl">Začnime krátkym e-mailom.</h2>
           <p className="mx-auto mb-10 max-w-xl leading-relaxed text-muted-foreground">Napíšte mi, čo potrebujete vyriešiť. Ozvem sa s doplňujúcimi otázkami a navrhnem ďalší konkrétny krok.</p>
-          <a href="mailto:info@lanzo.sk?subject=Mám záujem o služby Lanzo" className="inline-flex min-h-14 items-center justify-center bg-foreground px-8 font-semibold text-background transition-colors hover:bg-primary hover:text-primary-foreground">Napísať na info@lanzo.sk</a>
+          <Link to="/kontakt" className="inline-flex min-h-14 items-center justify-center bg-foreground px-8 font-semibold text-background transition-colors hover:bg-primary hover:text-primary-foreground">Otvoriť kontaktný formulár</Link>
         </div>
       </section>
 

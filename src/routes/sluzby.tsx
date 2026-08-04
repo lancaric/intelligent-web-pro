@@ -104,9 +104,9 @@ function ServicesPage() {
               Domov
             </Link>
             <span className="hidden font-semibold text-foreground sm:inline-flex">Služby</span>
-            <a href="mailto:info@lanzo.sk" className="font-mono text-xs font-semibold transition-colors hover:text-primary">
+            <Link to="/kontakt" className="font-mono text-xs font-semibold transition-colors hover:text-primary">
               NAPÍSAŤ →
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
