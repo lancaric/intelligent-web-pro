@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Clock3, Mail, MapPin } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { z } from "zod";
@@ -31,21 +31,30 @@ const contactSchema = z.object({
   email: z.string().trim().email("Zadajte platnú e-mailovú adresu.").max(255, "E-mail je príliš dlhý."),
   service: z.enum(["IT podpora", "Webová stránka", "Automatizácia", "Webová aplikácia", "Iné"]),
   message: z.string().trim().min(10, "Popíšte požiadavku aspoň 10 znakmi.").max(1500, "Správa môže mať najviac 1 500 znakov."),
+  gdpr_consent: z.boolean().refine((v) => v === true, "Súhlas so spracovaním údajov je povinný."),
+  newsletter_consent: z.boolean().optional().default(false),
 });
 
-type FieldErrors = Partial<Record<"name" | "email" | "service" | "message", string>>;
+type FieldErrors = Partial<Record<"name" | "email" | "service" | "message" | "gdpr_consent", string>>;
 
 function ContactPage() {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitError(null);
+
     const form = new FormData(event.currentTarget);
     const result = contactSchema.safeParse({
       name: form.get("name"),
       email: form.get("email"),
       service: form.get("service"),
       message: form.get("message"),
+      gdpr_consent: form.get("gdpr_consent") === "on",
+      newsletter_consent: form.get("newsletter_consent") === "on",
     });
 
     if (!result.success) {
@@ -61,11 +70,37 @@ function ContactPage() {
     }
 
     setErrors({});
-    const subject = encodeURIComponent(`Dopyt: ${result.data.service}`);
-    const body = encodeURIComponent(
-      `Meno: ${result.data.name}\nE-mail: ${result.data.email}\nSlužba: ${result.data.service}\n\n${result.data.message}`,
-    );
-    window.location.href = `mailto:info@lanzo.sk?subject=${subject}&body=${body}`;
+    setSubmitting(true);
+
+    try {
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/submit-contact`;
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({
+          name: result.data.name,
+          email: result.data.email,
+          service: result.data.service,
+          message: result.data.message,
+          gdpr_consent: result.data.gdpr_consent,
+          newsletter_consent: result.data.newsletter_consent,
+          website: form.get("website") ?? "",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Odoslanie zlyhalo.");
+      }
+
+      navigate({ to: "/podakovanie" });
+    } catch {
+      setSubmitError("Nepodarilo sa odoslať formulár. Skúste to prosím znova, alebo napíšte priamo na info@lanzo.sk.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const inputClass = "min-h-12 w-full border border-input bg-background px-4 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary";
@@ -121,6 +156,11 @@ function ContactPage() {
             <div className="mb-8 flex items-center justify-between gap-4 border-b border-border pb-4 font-mono text-[10px] uppercase">
               <span>LANZO_CONTACT_PROTOCOL</span><span className="text-success">[ONLINE]</span>
             </div>
+            {/* Honeypot — skryté pole na odhalenie botov. Reálni používatelia ho nevidia. */}
+            <div className="pointer-events-none absolute left-[-9999px] h-px w-px overflow-hidden" aria-hidden="true">
+              <label htmlFor="website">Nevypĺňajte toto pole</label>
+              <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
             <div className="grid gap-6 sm:grid-cols-2">
               <Field label="Meno" error={errors.name} htmlFor="name">
                 <input id="name" name="name" type="text" autoComplete="name" maxLength={100} className={inputClass} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "name-error" : undefined} placeholder="Vaše meno" />
@@ -141,11 +181,31 @@ function ContactPage() {
                   <textarea id="message" name="message" rows={6} minLength={10} maxLength={1500} className={`${inputClass} resize-y py-3`} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "message-error" : undefined} placeholder="Stručne opíšte problém, cieľ alebo predstavu..." />
                 </Field>
               </div>
+              <div className="sm:col-span-2">
+                <label htmlFor="newsletter_consent" className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-muted-foreground">
+                  <input id="newsletter_consent" name="newsletter_consent" type="checkbox" className="mt-0.5 size-4 accent-primary" />
+                  <span>Súhlasím so spracovaním môjho e-mailu pre marketingové a analytické účely (cookies, newsletter, ponuky). Súhlas môžem kedykoľvek odvolať.</span>
+                </label>
+              </div>
+              <div className="sm:col-span-2">
+                <label htmlFor="gdpr_consent" className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-muted-foreground">
+                  <input id="gdpr_consent" name="gdpr_consent" type="checkbox" className="mt-0.5 size-4 accent-primary" aria-invalid={Boolean(errors.gdpr_consent)} aria-describedby={errors.gdpr_consent ? "gdpr_consent-error" : undefined} />
+                  <span>Súhlasím so spracovaním osobných údajov v zmysle GDPR. Bližšie informácie v <Link to="/ochrana-sukromia" className="font-semibold text-foreground underline underline-offset-2 hover:text-primary">zásadách ochrany súkromia</Link>. Údaje budú uložené maximálne 12 mesiacov.</span>
+                </label>
+                {errors.gdpr_consent && <p id="gdpr_consent-error" className="mt-2 text-xs text-destructive" role="alert">{errors.gdpr_consent}</p>}
+              </div>
             </div>
+
+            {submitError && (
+              <div className="mt-6 border border-destructive/50 bg-destructive/5 px-4 py-3 text-sm text-destructive" role="alert">
+                {submitError}
+              </div>
+            )}
+
             <div className="mt-8 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-xs font-mono text-[10px] leading-relaxed text-muted-foreground">Formulár otvorí váš e-mailový program s pripravenou správou.</p>
-              <Button type="submit" className="min-h-12 rounded-none bg-foreground px-6 text-background shadow-none hover:bg-primary hover:text-primary-foreground">
-                Pripraviť e-mail <ArrowRight aria-hidden="true" />
+              <p className="max-w-xs font-mono text-[10px] leading-relaxed text-muted-foreground">Po odoslaní dostanete potvrdzovací e-mail a uvidíte ďakovnú stránku.</p>
+              <Button type="submit" disabled={submitting} className="min-h-12 rounded-none bg-foreground px-6 text-background shadow-none hover:bg-primary hover:text-primary-foreground disabled:opacity-60">
+                {submitting ? "Odosielam..." : <>Odoslať dopyt <ArrowRight aria-hidden="true" /></>}
               </Button>
             </div>
           </form>
@@ -154,7 +214,11 @@ function ContactPage() {
 
       <footer className="border-t border-border py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 font-mono text-[10px] uppercase text-muted-foreground sm:px-6 md:flex-row md:items-center">
-          <span>© {new Date().getFullYear()} Lanzo</span><span>Precízna technológia / ľudský prístup</span>
+          <span>© {new Date().getFullYear()} Lanzo</span>
+          <div className="flex flex-wrap gap-x-8 gap-y-3">
+            <Link to="/ochrana-sukromia" className="transition-colors hover:text-primary">Ochrana súkromia</Link>
+            <Link to="/cookies" className="transition-colors hover:text-primary">Cookies</Link>
+          </div>
         </div>
       </footer>
     </main>

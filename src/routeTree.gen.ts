@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as OchranaSukromiaRouteImport } from './routes/ochrana-sukromia'
+import { Route as PodakovanieRouteImport } from './routes/podakovanie'
 import { Route as SluzbyRouteImport } from './routes/sluzby'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +21,24 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KontaktRoute = KontaktRouteImport.update({
   id: '/kontakt',
   path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OchranaSukromiaRoute = OchranaSukromiaRouteImport.update({
+  id: '/ochrana-sukromia',
+  path: '/ochrana-sukromia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PodakovanieRoute = PodakovanieRouteImport.update({
+  id: '/podakovanie',
+  path: '/podakovanie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SluzbyRoute = SluzbyRouteImport.update({
@@ -31,31 +49,62 @@ const SluzbyRoute = SluzbyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cookies': typeof CookiesRoute
   '/kontakt': typeof KontaktRoute
+  '/ochrana-sukromia': typeof OchranaSukromiaRoute
+  '/podakovanie': typeof PodakovanieRoute
   '/sluzby': typeof SluzbyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cookies': typeof CookiesRoute
   '/kontakt': typeof KontaktRoute
+  '/ochrana-sukromia': typeof OchranaSukromiaRoute
+  '/podakovanie': typeof PodakovanieRoute
   '/sluzby': typeof SluzbyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cookies': typeof CookiesRoute
   '/kontakt': typeof KontaktRoute
+  '/ochrana-sukromia': typeof OchranaSukromiaRoute
+  '/podakovanie': typeof PodakovanieRoute
   '/sluzby': typeof SluzbyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kontakt' | '/sluzby'
+  fullPaths:
+    | '/'
+    | '/cookies'
+    | '/kontakt'
+    | '/ochrana-sukromia'
+    | '/podakovanie'
+    | '/sluzby'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kontakt' | '/sluzby'
-  id: '__root__' | '/' | '/kontakt' | '/sluzby'
+  to:
+    | '/'
+    | '/cookies'
+    | '/kontakt'
+    | '/ochrana-sukromia'
+    | '/podakovanie'
+    | '/sluzby'
+  id:
+    | '__root__'
+    | '/'
+    | '/cookies'
+    | '/kontakt'
+    | '/ochrana-sukromia'
+    | '/podakovanie'
+    | '/sluzby'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CookiesRoute: typeof CookiesRoute
   KontaktRoute: typeof KontaktRoute
+  OchranaSukromiaRoute: typeof OchranaSukromiaRoute
+  PodakovanieRoute: typeof PodakovanieRoute
   SluzbyRoute: typeof SluzbyRoute
 }
 
@@ -68,11 +117,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kontakt': {
       id: '/kontakt'
       path: '/kontakt'
       fullPath: '/kontakt'
       preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ochrana-sukromia': {
+      id: '/ochrana-sukromia'
+      path: '/ochrana-sukromia'
+      fullPath: '/ochrana-sukromia'
+      preLoaderRoute: typeof OchranaSukromiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/podakovanie': {
+      id: '/podakovanie'
+      path: '/podakovanie'
+      fullPath: '/podakovanie'
+      preLoaderRoute: typeof PodakovanieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sluzby': {
@@ -87,7 +157,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CookiesRoute: CookiesRoute,
   KontaktRoute: KontaktRoute,
+  OchranaSukromiaRoute: OchranaSukromiaRoute,
+  PodakovanieRoute: PodakovanieRoute,
   SluzbyRoute: SluzbyRoute,
 }
 export const routeTree = rootRouteImport

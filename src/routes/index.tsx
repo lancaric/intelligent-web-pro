@@ -209,7 +209,7 @@ function Index() {
       <footer className="py-14">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-7 px-5 font-mono text-[10px] uppercase text-muted-foreground sm:px-6 md:flex-row md:items-center">
           <div>© {new Date().getFullYear()} Lanzo</div>
-          <div className="flex flex-wrap gap-x-8 gap-y-3"><span>Slovensko / Remote</span><a href="mailto:info@lanzo.sk" className="transition-colors hover:text-primary">info@lanzo.sk</a></div>
+          <div className="flex flex-wrap gap-x-8 gap-y-3"><span>Slovensko / Remote</span><a href="mailto:info@lanzo.sk" className="transition-colors hover:text-primary">info@lanzo.sk</a><Link to="/ochrana-sukromia" className="transition-colors hover:text-primary">Ochrana súkromia</Link><Link to="/cookies" className="transition-colors hover:text-primary">Cookies</Link></div>
         </div>
       </footer>
     </main>
