@@ -15,6 +15,7 @@ import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as OchranaSukromiaRouteImport } from './routes/ochrana-sukromia'
 import { Route as PodakovanieRouteImport } from './routes/podakovanie'
 import { Route as SluzbyRouteImport } from './routes/sluzby'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const SluzbyRoute = SluzbyRouteImport.update({
   path: '/sluzby',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/ochrana-sukromia': typeof OchranaSukromiaRoute
   '/podakovanie': typeof PodakovanieRoute
   '/sluzby': typeof SluzbyRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/ochrana-sukromia': typeof OchranaSukromiaRoute
   '/podakovanie': typeof PodakovanieRoute
   '/sluzby': typeof SluzbyRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/ochrana-sukromia': typeof OchranaSukromiaRoute
   '/podakovanie': typeof PodakovanieRoute
   '/sluzby': typeof SluzbyRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/ochrana-sukromia'
     | '/podakovanie'
     | '/sluzby'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/ochrana-sukromia'
     | '/podakovanie'
     | '/sluzby'
+    | '/api/chat'
   id:
     | '__root__'
     | '/'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/ochrana-sukromia'
     | '/podakovanie'
     | '/sluzby'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +118,7 @@ export interface RootRouteChildren {
   OchranaSukromiaRoute: typeof OchranaSukromiaRoute
   PodakovanieRoute: typeof PodakovanieRoute
   SluzbyRoute: typeof SluzbyRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SluzbyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   OchranaSukromiaRoute: OchranaSukromiaRoute,
   PodakovanieRoute: PodakovanieRoute,
   SluzbyRoute: SluzbyRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
