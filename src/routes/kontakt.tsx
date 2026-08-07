@@ -73,12 +73,13 @@ function ContactPage() {
     setSubmitting(true);
 
     try {
-      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/submit-contact`;
+      const apiUrl = `${import.meta.env['VITE_SUPABASE_URL']}/functions/v1/submit-contact`;
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          Authorization: `Bearer ${import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY']}`,
+
         },
         body: JSON.stringify({
           name: result.data.name,
