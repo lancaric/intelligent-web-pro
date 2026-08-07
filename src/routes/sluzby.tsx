@@ -378,6 +378,124 @@ function ServicesPage() {
         </div>
       </section>
 
+      {/* IT podpora — komunikácia a SLA */}
+      <section id="it-podpora-sla" className="border-t border-border bg-surface py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="mb-14 max-w-3xl">
+            <p className="mb-4 font-mono text-xs uppercase text-primary">IT podpora / Ako to funguje</p>
+            <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl">
+              Vieme, dokedy sa<br />ozveme a čo urobíme
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              Podpora nie je sľub „ozveme sa čo najskôr". Máme pevne dané kanály, časy odozvy a postup riešenia — všetko je súčasťou dohody.
+            </p>
+          </div>
+
+          <div className="mb-px grid gap-px border-y border-border bg-border sm:grid-cols-3">
+            {supportChannels.map((c) => {
+              const Icon = c.icon;
+              return (
+                <div key={c.channel} className="bg-surface p-8">
+                  <Icon aria-hidden="true" className="mb-5 size-6 text-primary" />
+                  <h3 className="text-lg font-bold">{c.channel}</h3>
+                  <p className="mt-1 font-mono text-xs text-primary">{c.detail}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.note}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-14">
+            <div className="mb-6 flex items-center gap-3">
+              <Clock aria-hidden="true" className="size-5 text-primary" />
+              <h3 className="text-xl font-bold">Garantované časy odozvy (SLA)</h3>
+            </div>
+            <div className="overflow-x-auto border border-border bg-background">
+              <table className="w-full min-w-[720px] text-left text-sm">
+                <caption className="sr-only">Prehľad priorít a garantovaných časov odozvy IT podpory</caption>
+                <thead className="border-b border-border font-mono text-[11px] uppercase text-muted-foreground">
+                  <tr>
+                    <th scope="col" className="px-5 py-4">Priorita</th>
+                    <th scope="col" className="px-5 py-4">Typický príklad</th>
+                    <th scope="col" className="px-5 py-4">Odozva</th>
+                    <th scope="col" className="px-5 py-4">Riešenie</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {slaLevels.map((row) => (
+                    <tr key={row.priority} className="border-b border-border last:border-b-0">
+                      <th scope="row" className="px-5 py-5 font-bold">{row.priority}</th>
+                      <td className="px-5 py-5 text-muted-foreground">{row.example}</td>
+                      <td className="px-5 py-5 font-mono text-xs text-primary">{row.response}</td>
+                      <td className="px-5 py-5 text-muted-foreground">{row.fix}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-4 font-mono text-[11px] uppercase text-muted-foreground">
+              Pracovné dni 8:00 – 17:00 / rozšírená dostupnosť po dohode
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Workflow */}
+      <section className="border-t border-border py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="mb-14 max-w-3xl">
+            <p className="mb-4 font-mono text-xs uppercase text-primary">Vzorový workflow</p>
+            <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl">
+              Od nahlásenia po<br />overené riešenie
+            </h2>
+          </div>
+          <ol className="grid gap-px border-y border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {supportWorkflow.map((s) => (
+              <li key={s.step} className="bg-background p-8">
+                <span className="mb-6 block font-mono text-sm text-primary">{s.step}</span>
+                <h3 className="mb-3 text-lg font-bold">{s.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{s.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-t border-border py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6">
+          <div className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <p className="mb-4 font-mono text-xs uppercase text-primary">Časté otázky</p>
+              <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl">
+                Na čo sa firmy<br />pýtajú najčastejšie
+              </h2>
+              <Link
+                to="/kontakt"
+                className="mt-8 inline-flex min-h-12 items-center gap-3 border border-foreground px-6 text-sm font-semibold transition-colors hover:bg-foreground hover:text-background"
+              >
+                Máte inú otázku? <ArrowRight aria-hidden="true" className="size-4" />
+              </Link>
+            </div>
+            <div className="divide-y divide-border border-y border-border lg:col-span-8">
+              {supportFaq.map((item) => (
+                <details key={item.question} className="group px-1 py-6">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-base font-bold marker:hidden">
+                    {item.question}
+                    <span aria-hidden="true" className="mt-1 font-mono text-primary transition-transform group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
       {/* Trust pillars */}
       <section className="bg-surface py-20 sm:py-24 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-6">
