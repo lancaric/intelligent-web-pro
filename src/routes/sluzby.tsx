@@ -194,6 +194,128 @@ const trustPillars = [
   },
 ];
 
+const supportChannels = [
+  {
+    icon: Mail,
+    channel: "E-mail",
+    detail: "info@lanzo.sk",
+    note: "Základný kanál pre všetky požiadavky. Každý e-mail dostane potvrdenie o prijatí.",
+  },
+  {
+    icon: Phone,
+    channel: "Telefón",
+    detail: "Pracovné dni 8:00 – 17:00",
+    note: "Pre urgentné výpadky, ktoré blokujú prevádzku firmy.",
+  },
+  {
+    icon: MessagesSquare,
+    channel: "Zdieľaný kanál",
+    detail: "Teams / Slack",
+    note: "Pri dlhodobej spolupráci zriadime spoločný kanál pre rýchlu komunikáciu.",
+  },
+];
+
+const slaLevels = [
+  {
+    priority: "Kritická",
+    example: "Výpadok siete, servera alebo e-mailov — firma nemôže pracovať.",
+    response: "do 1 hodiny",
+    fix: "riešenie začíname okamžite",
+  },
+  {
+    priority: "Vysoká",
+    example: "Nefunkčné zariadenie alebo aplikácia u viacerých používateľov.",
+    response: "do 4 hodín",
+    fix: "spravidla v ten istý pracovný deň",
+  },
+  {
+    priority: "Bežná",
+    example: "Individuálny problém používateľa, nastavenie účtu, inštalácia.",
+    response: "do 1 pracovného dňa",
+    fix: "do 2 pracovných dní",
+  },
+  {
+    priority: "Plánovaná",
+    example: "Upgrade, migrácia, nové zariadenia, konzultácia.",
+    response: "do 2 pracovných dní",
+    fix: "podľa dohodnutého termínu",
+  },
+];
+
+const supportWorkflow = [
+  {
+    step: "01",
+    title: "Nahlásenie",
+    description:
+      "Požiadavku pošlete e-mailom, telefonicky alebo v zdieľanom kanáli. Zaznamenáme ju a potvrdíme prijatie.",
+  },
+  {
+    step: "02",
+    title: "Triáž a priorita",
+    description:
+      "Do niekoľkých minút posúdime dopad na prevádzku a pridelíme prioritu podľa SLA tabuľky.",
+  },
+  {
+    step: "03",
+    title: "Diagnostika",
+    description:
+      "Vzdialene sa pripojíme, zistíme príčinu a informujeme vás, čo sa deje a aký je odhad riešenia.",
+  },
+  {
+    step: "04",
+    title: "Riešenie",
+    description:
+      "Problém odstránime vzdialene, prípadne prídeme osobne. Priebeh vidíte v komunikácii, nie až na konci.",
+  },
+  {
+    step: "05",
+    title: "Overenie a uzavretie",
+    description:
+      "Potvrdíte, že všetko funguje. Až potom požiadavku uzatvárame a zapisujeme riešenie do dokumentácie.",
+  },
+  {
+    step: "06",
+    title: "Prevencia",
+    description:
+      "Opakované problémy riešime systémovo — úpravou konfigurácie, monitoringom alebo návrhom zmeny.",
+  },
+];
+
+const supportFaq = [
+  {
+    question: "Ako rýchlo reagujete na nahlásený problém?",
+    answer:
+      "Podľa priority: kritické výpadky do 1 hodiny, bežné požiadavky do 1 pracovného dňa. Presné časy máte v SLA tabuľke vyššie a sú súčasťou zmluvy.",
+  },
+  {
+    question: "Potrebujem zmluvu, alebo sa dá aj jednorazovo?",
+    answer:
+      "Oboje. Jednorazové zásahy fakturujeme hodinovo, pri pravidelnej spolupráci odporúčame mesačný paušál s garantovaným časom odozvy.",
+  },
+  {
+    question: "Riešite problémy vzdialene alebo prídete osobne?",
+    answer:
+      "Väčšinu požiadaviek vyriešime vzdialene do niekoľkých minút. Ak to problém vyžaduje (hardvér, sieť, nové zariadenia), dohodneme osobný výjazd.",
+  },
+  {
+    question: "Čo ak sa niečo pokazí mimo pracovných hodín?",
+    answer:
+      "Pri paušálnej spolupráci sa dá dohodnúť rozšírená dostupnosť vrátane večerov a víkendov pre kritické výpadky.",
+  },
+  {
+    question: "Prevezmete správu aj po inom dodávateľovi?",
+    answer:
+      "Áno. Začíname auditom prostredia, zdokumentujeme prístupy a nastavenia a až potom preberáme zodpovednosť — bez výpadku prevádzky.",
+  },
+  {
+    question: "Ako fakturujete a čo je v cene?",
+    answer:
+      "Transparentne: pri paušále je v cene dohodnutý rozsah podpory a monitoring, nadrámcové práce odsúhlasujete vopred. Nikdy vás neprekvapí faktúra bez vysvetlenia.",
+  },
+];
+
+
+
 function ServicesPage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
