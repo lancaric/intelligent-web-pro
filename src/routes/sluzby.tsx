@@ -3,13 +3,18 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
+  Clock,
   Cloud,
   Cpu,
   Lock,
+  Mail,
+  MessagesSquare,
   Network,
+  Phone,
   ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/sluzby")({
   head: () => ({
