@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
+import { ChatWidget } from "@/components/chat-widget";
 
 function NotFoundComponent() {
   return (
